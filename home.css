@@ -12,6 +12,29 @@
   margin-bottom: 0.25rem;
 }
 
+
+/* decorações do challenge-home-card */
+.challenge-home-card {
+  background: linear-gradient(to bottom right, #F25260, #9D85F2); /* efeito de degrade vermelho para roxo */
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  color: white;
+  margin-bottom: 2rem;
+}
+.challenge-home-card-header {
+  display: flex; /* alinha icone e titulo */
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.challenge-home-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
 /* decorações do carousel-header */
 .carousel-header {
   display: flex; /* alinha o título e o link (ver todos) */
@@ -22,6 +45,7 @@
 .carousel-header h2 {
   font-size: 20px;
 }
+
 
 /* decorações do carousel-body */
 .carousel-body {
@@ -35,6 +59,7 @@
 .carousel-body::-webkit-scrollbar {
   display: none; /* esconde a barra do scroll */
 }
+
 
 /* decorações do home card */
 .home-card {
