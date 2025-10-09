@@ -13,12 +13,13 @@
 
 /* decorações do challenge-home-card */
 .challenge-home-card {
-  background: linear-gradient(to bottom right, #F25260, #9D85F2); /* efeito de degrade vermelho para roxo */
+  background: linear-gradient(to bottom right, #FF4D4D, #9D85F2); /* efeito de degrade vermelho para roxo */
   border-radius: 0.75rem;
   padding: 1.5rem;
   cursor: pointer;
   color: white;
   margin-bottom: 2rem;
+  transition: transform 0.2s; /* deixa as transições de efeito mais suaves, colocado por causa do efeito no hover */
 }
 .challenge-home-card-header {
   display: flex; /* alinha icone e titulo */
@@ -31,6 +32,9 @@
 .challenge-home-card h3 {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
+}
+.challenge-home-card:hover {
+  transform: scale(1.02); /* efeito de zoom no card quando passar o mouse */
 }
 
 /* decorações do carousel-header */
@@ -76,7 +80,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover; /* imagem cobre o espaço inteiro */
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; /* deixa as transições de efeito mais suaves, colocado por causa do efeito no hover */
 }
 .home-card h4 {
   font-weight: 600;
@@ -89,4 +93,7 @@
   white-space: nowrap; /* texto não quebra linha */
   overflow: hidden; /* esconde se cortar pela responsividade */
   text-overflow: ellipsis;
+}
+.home-card:hover .home-card-image-tag {
+  transform: scale(1.1); /* efeito de zoom na imagem quando passar o mouse */
 }

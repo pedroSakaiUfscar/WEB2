@@ -46,7 +46,7 @@
 }
 /* Muda a cor de fundo e do texto quando tem a tag active */
 .sidebar-tab.active {
-  background-color: #F25260;
+  background-color: #FF4D4D;
   color: #F0F0F0
 }
 .sidebar-tab .img {
