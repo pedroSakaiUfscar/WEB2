@@ -63,6 +63,7 @@
 
 /* decorações do home card */
 .home-card {
+  flex-shrink: 0; /* cards não vão variar de tamanho independente da tela */
   width: 160px; /* tamanho fixo para cards */
   cursor: pointer;
 }
@@ -73,10 +74,11 @@
   margin-bottom: 0.75rem;
   aspect-ratio: 1 / 1; /* div quadrado */
 }
-.home-card-image-img {
+.home-card-image-tag {
   width: 100%;
   height: 100%;
   object-fit: cover; /* imagem cobre o espaço inteiro */
+  transition: transform 0.3s ease;
 }
 .home-card h4 {
   font-weight: 600;
