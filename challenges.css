@@ -1,7 +1,8 @@
+/* div principal com o conteúdo da página */
 .main-content {
   max-width: 1100px;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 2rem; /* uso do rem para maior responsividade */
 }
 
 .icon-bg {
@@ -32,6 +33,7 @@
   font-size: 1rem;
 }
 
+/* tab bar de seleção entre desafios pessoais e em grupo */
 .tab-bar {
   display: flex;
   border-bottom: 1px solid #2A3446;
@@ -49,12 +51,15 @@
   color: #9CA3AF;
   cursor: pointer;
 }
+
 .tab-button:hover {
   color: #F0F0F0;
 }
+
 .tab-button.active {
   color: #FF4D4D;
 }
+
 .tab-button.active::after {
   content: '';
   position: absolute;
@@ -64,13 +69,16 @@
   height: 2px;
   background-color: #FF4D4D;
 }
+
 .tab-content {
   display: none;
 }
+
 .tab-content.active {
   display: block;
 }
 
+/* estatísticas do usuário */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -84,12 +92,12 @@
   padding: 1rem;
 }
 
-.stat-card p:first-child {
+.stat-card p:first-child { /* usa pseudo-classe para selecionar o primeiro elemento filho */
   font-size: 0.875rem;
   margin-bottom: 0.25rem;
 }
 
-.stat-card p:last-child {
+.stat-card p:last-child { /* usa pseudo-classe para selecionar o último elemento filho */
   font-size: 1.5rem;
   font-weight: 700;
   color: #F0F0F0;
@@ -162,7 +170,7 @@
 
 .challenge-card-progress-bar-fg {
   height: 100%;
-  background: linear-gradient(to right, #A188FF, #FF4D4D);
+  background: linear-gradient(to right, #A188FF, #FF4D4D); /* gradiente de cores para a barra de progresso */
 }
 
 .challenge-card-reward {
