@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="challenges.css">
+</head>
+<body>
+
+    <!-- seção principal-->
+    <main class="main-content">
+        <!-- cabeçalho da tela -->
+        <header class="page-header">
+            <div class="page-header-title">
+                <div class="icon-bg">
+                    <img src="assets/trophy.svg" width="32" height="32">
+                </div>
+                <h1>Desafios de hoje</h1>
+            </div>
+            <p class="page-header-subtitle">Complete desafios e convide seus amigos para participar!</p>
+        </header>
+
+        <!-- seção que mostra pontos totais e quantidade de tarefas concluídas-->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p>Pontos Totais</p>
+                <p>2.450</p>
+            </div>
+            <div class="stat-card">
+                <p>Concluídos</p>
+                <p>18</p>
+            </div>
+        </div>
+
+        <!-- barra de abas para alternar entre desafios pessoais e em grupo -->
+        <div class="tab-bar">
+            <button class="tab-button active" data-tab="my-challenges">Meus Desafios</button>
+            <button class="tab-button" data-tab="group-challenges">Desafios em Grupo</button>
+        </div>
+        
+        <!-- aba que exibe os desafios pessoais -->
+        <div id="my-challenges" class="tab-content active">
+            <div class="challenges-list">
+                <div class="challenge-card">
+                    <div class="challenge-card-content">
+                        <div class="challenge-card-icon">
+                            <img src="assets/headphone.svg" width="32" height="32">
+                        </div>
+                        <div class="challenge-card-details">
+                            <h4>Explorador Musical</h4>
+                            <p>Ouça 10 artistas novos esta semana</p>
+                            <div class="challenge-card-progress-info">
+                                <span>Progresso</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="challenge-card-progress-bar-bg">
+                                <div class="challenge-card-progress-bar-fg" style="width: 60%;"></div>
+                            </div>
+                            <div class="challenge-card-reward">
+                                +100 Pontos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="challenge-card">
+                    <div class="challenge-card-content">
+                        <div class="challenge-card-icon">
+                           <img src="assets/music.svg" width="32" height="32">
+                        </div>
+                        <div class="challenge-card-details">
+                            <h4>Maratonista do Rock</h4>
+                            <p>Ouça 5 músicas de Rock Nacional</p>
+                            <div class="challenge-card-progress-info">
+                                <span>Progresso</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="challenge-card-progress-bar-bg">
+                                <div class="challenge-card-progress-bar-fg" style="width: 80%;"></div>
+                            </div>
+                             <div class="challenge-card-reward">
+                                +50 Pontos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- aba que exibe os desafios em grupo -->
+        <div id="group-challenges" class="tab-content"></div>
+    </main>
+</body>
+</html>
