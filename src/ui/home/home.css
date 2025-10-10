@@ -131,3 +131,10 @@
   font-weight: inherit; /* herda do pai */
   display: block;
 }
+
+.challenge-home-card a { /* tira a decoração do a em challenge-home-card definida no common */
+  text-decoration: none;
+  color: inherit; /* herda do pai */
+  font-weight: inherit; /* herda do pai */
+  display: block;
+}
