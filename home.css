@@ -1,55 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+/* decorações do home-header */
+.home-header {
+  display: flex; /* alinha os itens internos em uma linha */
+  justify-content: space-between;
+  align-items: center; /* centralizar os itens */
+  margin-bottom: 2rem;
+}
+.home-header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+
+/* decorações do challenge-home-card */
+.challenge-home-card {
+  background: linear-gradient(to bottom right, #FF4D4D, #9D85F2); /* efeito de degrade vermelho para roxo */
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  cursor: pointer;
+  color: white;
+  margin-bottom: 2rem;
+  transition: transform 0.2s; /* deixa as transições de efeito mais suaves, colocado por causa do efeito no hover */
+}
+.challenge-home-card-header {
+  display: flex; /* alinha icone e titulo */
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.challenge-home-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.challenge-home-card:hover {
+  transform: scale(1.02); /* efeito de zoom no card quando passar o mouse */
+}
+
+/* barra de progresso do card de desafio*/
+.challenge-home-card-progress-bar {
+  display: flex; /* alinha a barra e o texto + necessário para os filhos serem flex*/
+  align-items: center;
+  gap: 0.5rem; /* espaçamento entre barra e o texto */
+  margin-top: 1rem; /* margem no topo para ter espaçamento antes da barra */
+}
+
+.challenge-home-card-progress-bar-bg {
+  flex-grow: 1; /* pega 100% (ou double 1) do espaço disponível da div pai, já tirando o espaço do texto! "width: 100%" não funciona pq nn conta o texto/outros elementos */
+  background-color: rgba(255, 255, 255, 0.2); /* a cor é branca (255, 255, 255) e 0.2 representa a opacidade, deixamos quase tranparente para combinar com a cor de fundo que não é constante */
+  border-radius: 999px; /* borda bem redonda & igual ao componente da frente */
+  height: 0.5rem; /* tamanho fixo */
+}
+
+.challenge-home-card-progress-bar-fg { /* barra branca que indica o progresso, o quanto de progresso é definido na tag html */
+  background-color: white;
+  height: 100%; /* como ele está dentro da div de fundo e ela controla a altura, pode se esticar o max possivel para ficar igual a ela */
+  border-radius: 999px; /* borda bem redonda & igual a div de fundo */
+}
+
+.challenge-home-card-progress-bar-text { /* texto do lado da barra de progresso */
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 
 /* decorações do carousel-header */
 .carousel-header {
-  display: flex;
+  display: flex; /* alinha o título e o link (ver todos) */
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 .carousel-header h2 {
   font-size: 20px;
 }
 
+
 /* decorações do carousel-body */
 .carousel-body {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
+  display: flex; /* alinha os cards */
+  gap: 1rem; /* espaço entre os cards */
+  overflow-x: auto; /* rolagem horizontal dos cards (se overflox) */
   padding-bottom: 1rem;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* esconde a barra do scroll */
+  scrollbar-width: none; /* esconde a barra do scroll */
 }
 .carousel-body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; /* esconde a barra do scroll */
 }
+
 
 /* decorações do home card */
 .home-card {
-  width: 160px;
+  flex-shrink: 0; /* cards não vão variar de tamanho independente da tela */
+  width: 160px; /* tamanho fixo para cards */
   cursor: pointer;
 }
 .home-card-image {
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* esconde se cortar pela responsividade */
   border-radius: 0.75rem;
   margin-bottom: 0.75rem;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* div quadrado */
 }
-.home-card img {
+.home-card-image-tag {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* imagem cobre o espaço inteiro */
+  transition: transform 0.3s ease; /* deixa as transições de efeito mais suaves, colocado por causa do efeito no hover */
 }
 .home-card h4 {
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: nowrap; /* texto não quebra linha */
+  overflow: hidden; /* esconde se cortar pela responsividade */
   text-overflow: ellipsis;
 }
 .home-card p {
   font-size: 0.8rem;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: nowrap; /* texto não quebra linha */
+  overflow: hidden; /* esconde se cortar pela responsividade */
   text-overflow: ellipsis;
+}
+.home-card:hover .home-card-image-tag {
+  transform: scale(1.1); /* efeito de zoom na imagem quando passar o mouse */
 }

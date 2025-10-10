@@ -11,6 +11,8 @@
 
 .page-header {
   margin-bottom: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .page-header-title {
@@ -84,6 +86,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .stat-card {
@@ -115,6 +119,8 @@
   padding: 1.25rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .challenge-card:hover {
