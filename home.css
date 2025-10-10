@@ -37,6 +37,33 @@
   transform: scale(1.02); /* efeito de zoom no card quando passar o mouse */
 }
 
+/* barra de progresso do card de desafio*/
+.challenge-home-card-progress-bar {
+  display: flex; /* alinha a barra e o texto + necessário para os filhos serem flex*/
+  align-items: center;
+  gap: 0.5rem; /* espaçamento entre barra e o texto */
+  margin-top: 1rem; /* margem no topo para ter espaçamento antes da barra */
+}
+
+.challenge-home-card-progress-bar-bg {
+  flex-grow: 1; /* pega 100% (ou double 1) do espaço disponível da div pai, já tirando o espaço do texto! "width: 100%" não funciona pq nn conta o texto/outros elementos */
+  background-color: rgba(255, 255, 255, 0.2); /* a cor é branca (255, 255, 255) e 0.2 representa a opacidade, deixamos quase tranparente para combinar com a cor de fundo que não é constante */
+  border-radius: 999px; /* borda bem redonda & igual ao componente da frente */
+  height: 0.5rem; /* tamanho fixo */
+}
+
+.challenge-home-card-progress-bar-fg { /* barra branca que indica o progresso, o quanto de progresso é definido na tag html */
+  background-color: white;
+  height: 100%; /* como ele está dentro da div de fundo e ela controla a altura, pode se esticar o max possivel para ficar igual a ela */
+  border-radius: 999px; /* borda bem redonda & igual a div de fundo */
+}
+
+.challenge-home-card-progress-bar-text { /* texto do lado da barra de progresso */
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+
 /* decorações do carousel-header */
 .carousel-header {
   display: flex; /* alinha o título e o link (ver todos) */
