@@ -3,11 +3,14 @@
   display: flex; /* alinha os itens internos em uma linha */
   justify-content: space-between;
   align-items: center; /* centralizar os itens */
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .home-header h1 {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   margin-bottom: 0.25rem;
+}
+.home-header p {
+  font-size: 1rem;
 }
 
 
@@ -72,7 +75,10 @@
   margin-bottom: 1rem;
 }
 .carousel-header h2 {
-  font-size: 20px;
+  font-size: 1rem;
+}
+.carousel-header a {
+  font-size: 0.75rem;
 }
 
 
@@ -137,4 +143,29 @@
   color: inherit; /* herda do pai */
   font-weight: inherit; /* herda do pai */
   display: block;
+}
+
+/* configurações globais para a responsividade */
+@media (min-width: 768px) {
+  .bottom-navbar {
+    display: none;
+  }
+
+  .carousel-header h2 {
+    font-size: 1.25rem;
+  }
+  .carousel-header a {
+    font-size: 1rem;
+  }
+
+  .home-header {
+    margin-bottom: 2rem;
+  }
+  .home-header h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+  }
+  .home-header p {
+    font-size: 1.25rem;
+  }
 }
