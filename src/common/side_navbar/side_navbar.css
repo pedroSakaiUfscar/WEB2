@@ -14,9 +14,13 @@
   border-bottom: 1px solid #2A3446;
   display: flex;  /* alinha os itens da header (pretendemos colocar logo) */
   align-items: center;
+  gap: 0.2rem;
+  height: 72px;
 }
 .sidebar-header h1 {
   font-size: 1.25rem;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .sidebar-nav {
   padding: 1rem;
@@ -54,9 +58,41 @@
   height: 20px;
 }
 
+
+/* Efeito de colapsar */
+.sidebar {
+  transition: width 0.3s ease;
+}
+body {
+  transition: padding-left 0.3s ease; /* ajusta o padding do body principal com a mesma transição */
+}
+.sidebar.collapsed {
+  width: 88px; /* nova largura da sidebar recolhida */
+}
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+.sidebar.collapsed .sidebar-title {
+  display: none; /* esconde o título */
+}
+.sidebar.collapsed .sidebar-tab span {
+  display: none; /* esconde o texto dos ícones */
+}
+.sidebar.collapsed .sidebar-tab {
+  justify-content: center; /* centraliza o ícone quando o texto some */
+}
+.sidebar-tab .icon,
+.sidebar-tab img {
+  flex-shrink: 0;
+}
+
 /* configurações globais para a responsividade */
 @media (min-width: 768px) {
   .sidebar {
     display: flex; /* se o width da pág for no mínimo 768, o display é sobreescrito e a sidebar aparece */
+  }
+
+  body.sidebar-collapsed {
+    padding-left: 88px; /* mesma largura da sidebar recolhida */
   }
 }
