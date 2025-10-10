@@ -8,18 +8,19 @@
 </head>
 <body>
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
+            <img id="menu-toggle" src="../../../assets/menu.svg" width="24" height="24" alt="Menu">
             <h1 class="sidebar-title">Garimpo musical</h1>
         </div>
 
         <nav class="sidebar-nav">
-            <a href="../../ui/home/home.html" class="sidebar-tab">
+            <a href="../../ui/home/home.html" class="sidebar-tab active">
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 <span>Home</span>
             </a>
             <a href="../../ui/challenges/challenges.html" class="sidebar-tab">
-                <img src="../../../assets/trophy.svg" width="24" height="24" alt="">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M292-120v-66.67h154.67v-140q-52.34-11-93.17-44.83T296-456q-74.33-8.33-125.17-61.83Q120-571.33 120-645.33V-688q0-27.67 19.5-47.17t47.17-19.5h96V-840h394.66v85.33h96q27.67 0 47.17 19.5T840-688v42.67q0 74-50.83 127.5Q738.33-464.33 664-456q-16.67 50.67-57.5 84.5t-93.17 44.83v140H668V-120H292Zm-9.33-406.67V-688h-96v42.67q0 42.66 27 75.16t69 43.5ZM480-390q54.67 0 92.67-38.33 38-38.34 38-93v-252H349.33v252q0 54.66 38 93Q425.33-390 480-390Zm197.33-136.67q42-11 69-43.5t27-75.16V-688h-96v161.33ZM480-582Z"/></svg>
                 <span>Desafios</span>
             </a>
         </nav>
@@ -28,5 +29,16 @@
     <main class="main">
         <h1>Placeholder</h1>
     </main>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('collapsed');
+          body.classList.toggle('sidebar-collapsed');
+        });
+    </script>
 </body>
 </html>
