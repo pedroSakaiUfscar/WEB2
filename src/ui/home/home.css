@@ -18,11 +18,15 @@
 .challenge-home-card {
   background: linear-gradient(to bottom right, #FF4D4D, #9D85F2); /* efeito de degrade vermelho para roxo */
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   cursor: pointer;
   color: white;
   margin-bottom: 2rem;
   transition: transform 0.2s; /* deixa as transições de efeito mais suaves, colocado por causa do efeito no hover */
+ max-width: 800px;
 }
 .challenge-home-card-header {
   display: flex; /* alinha icone e titulo */
@@ -33,7 +37,11 @@
   margin-bottom: 0.5rem;
 }
 .challenge-home-card h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.challenge-home-card p {
+  font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
 .challenge-home-card:hover {
@@ -45,7 +53,6 @@
   display: flex; /* alinha a barra e o texto + necessário para os filhos serem flex*/
   align-items: center;
   gap: 0.5rem; /* espaçamento entre barra e o texto */
-  margin-top: 1rem; /* margem no topo para ter espaçamento antes da barra */
 }
 
 .challenge-home-card-progress-bar-bg {
@@ -99,7 +106,7 @@
 /* decorações do home card */
 .home-card {
   flex-shrink: 0; /* cards não vão variar de tamanho independente da tela */
-  width: 160px; /* tamanho fixo para cards */
+  width: 140px;
   cursor: pointer;
 }
 .home-card-image {
@@ -120,9 +127,10 @@
   white-space: nowrap; /* texto não quebra linha */
   overflow: hidden; /* esconde se cortar pela responsividade */
   text-overflow: ellipsis;
+  font-size: 0.8rem;
 }
 .home-card p {
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   white-space: nowrap; /* texto não quebra linha */
   overflow: hidden; /* esconde se cortar pela responsividade */
   text-overflow: ellipsis;
@@ -167,5 +175,29 @@
   }
   .home-header p {
     font-size: 1.25rem;
+  }
+
+  .challenge-home-card {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .challenge-home-card h3 {
+    font-size: 1.25rem;
+    /*margin-bottom: 0.5rem;*/
+  }
+  .challenge-home-card p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .home-card {
+    width: 160px;
+  }
+  .home-card h4 {
+    font-size: 1rem;
+  }
+  .home-card p {
+    font-size: 0.8rem;
   }
 }
