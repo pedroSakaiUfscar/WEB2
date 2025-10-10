@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
-    <link rel="stylesheet" href="common/common.css">
-    <link rel="stylesheet" href="common/side_navbar/side_navbar.css">
-    <link rel="stylesheet" href="common/bottom_navbar/bottom_navbar.css">
+    <link rel="stylesheet" href="../../common/common.css">
+    <link rel="stylesheet" href="../../common/side_navbar/side_navbar.css">
+    <link rel="stylesheet" href="../../common/bottom_navbar/bottom_navbar.css">
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
@@ -20,8 +20,8 @@
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 <span>Home</span>
             </a>
-            <a href="challenges.html" class="sidebar-tab">
-                <img src="assets/trophy.svg" width="24" height="24" alt="">
+            <a href="../challenges/challenges.html" class="sidebar-tab">
+                <img src="../../../assets/trophy.svg" width="24" height="24" alt="">
                 <span>Desafios</span>
             </a>
         </nav>
@@ -40,7 +40,7 @@
         <div class="challenge-home-card">
             <!-- div para header por ser na mesma linha -->
             <div class="challenge-home-card-header">
-                <img src="assets/flame.svg" width="20" height="20" alt="flame">
+                <img src="../../../assets/flame.svg" width="20" height="20" alt="flame">
                 <span>DESAFIO ATUAL</span>
             </div>
 
@@ -116,11 +116,13 @@
             <!-- body carrossel-->
             <div class="carousel-body">
                 <div class="home-card">
-                    <div class="home-card-image">
-                        <img src="https://i.imgur.com/fXymOor.jpeg" alt="Taylor Swift" class="home-card-image-tag">
-                    </div>
-                    <h4>Taylor Swift</h4>
-                    <p>Pop Alternativo</p>
+                    <a href="../profile/artist/artist_profile.html">
+                        <div class="home-card-image">
+                            <img src="https://i.imgur.com/fXymOor.jpeg" alt="Taylor Swift" class="home-card-image-tag">
+                        </div>
+                        <h4>Taylor Swift</h4>
+                        <p>Pop Alternativo</p>
+                    </a>
                 </div>
                 <div class="home-card">
                     <div class="home-card-image">
@@ -152,7 +154,7 @@
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Home</span>
         </a>
-        <a href="challenges.html" class="bottom-navbar-tab">
+        <a href="../challenges/challenges.html" class="bottom-navbar-tab">
             <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.87 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.13 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
             <span>Desafios</span>
         </a>

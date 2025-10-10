@@ -124,3 +124,10 @@
 .home-card:hover .home-card-image-tag {
   transform: scale(1.1); /* efeito de zoom na imagem quando passar o mouse */
 }
+
+.home-card a { /* tira a decoração do a em home-card definida no common */
+  text-decoration: none;
+  color: inherit; /* herda do pai */
+  font-weight: inherit; /* herda do pai */
+  display: block;
+}
