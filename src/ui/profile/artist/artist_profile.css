@@ -1,7 +1,6 @@
 .artist-header {
     position: relative;
     height: 15rem; 
-    margin: -1rem -1rem 1.5rem -1rem; 
     color: white; 
 }
 
@@ -57,7 +56,7 @@
 }
 
 .profile-info .subtitle {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     margin: 0;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
@@ -66,7 +65,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: #9CA3AF
 }
 
@@ -124,13 +123,13 @@
 }
 
 .song-item-details p {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: #9CA3AF;
     margin: 0;
 }
 
 .song-item-duration {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: #9CA3AF;
 }
 
@@ -138,7 +137,7 @@
     padding: 0.75rem 1.5rem; 
     border-radius: 50px;       
     font-weight: 600;         
-    font-size: 0.875rem;       
+    font-size: 0.8rem;       
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-transform: uppercase; 
@@ -194,7 +193,16 @@
     border-bottom-color: #FF4D4D;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+    .profile-info h1 {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .profile-info .subtitle {
+        font-size: 0.6rem;
+    }
+
     .artist-header {
         margin: 0 0 1.5rem 0; 
         border-radius: 0.5rem;
@@ -203,5 +211,49 @@
 
     .artist-header-content {
         padding: 1.5rem;
+    }
+
+    .profile-actions .btn {
+        font-size: 0.6rem;  
+    }
+
+    .profile-picture {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    .profile-stats {
+        font-size: 0.7rem;
+    }
+
+    .tab-button {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .profile-info h1 {
+        font-size: 1.6rem;
+    }
+
+    .profile-info .subtitle {
+        font-size: 0.5rem;
+    }
+
+    .profile-actions .btn {
+        font-size: 0.5rem;  
+        padding: 0.6rem 1.2rem; 
+    }
+
+    .profile-stats {
+        font-size: 0.6rem;
+    }
+
+    .tab-button {
+        font-size: 0.7rem;
+    }
+
+    .song-item {
+        font-size: 0.8rem;
     }
 }
