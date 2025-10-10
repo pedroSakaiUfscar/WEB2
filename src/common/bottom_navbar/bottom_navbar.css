@@ -6,7 +6,7 @@
   right: 0;
   background-color: #1A2235;
   border-top: 1px #2A3446;
-  height: 4.5rem;
+  height: 4rem;
   display: flex; /* aparece por default, mas o @media que controla se aparece ou nn */
   justify-content: space-around; /* os itens ficam espaçamos igualmente */
   align-items: center;
@@ -28,8 +28,8 @@
   color: #FF4D4D
 }
 .bottom-navbar-tab .icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
 }
 
 /* configurações globais para a responsividade */
