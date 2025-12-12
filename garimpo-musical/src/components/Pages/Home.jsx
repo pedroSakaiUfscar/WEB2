@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/home.css";
 
-const Home = () => {
+const Home = ( {onNavigate}) => {
   const [releases, setReleases] = useState([]);
   const [suggestedArtists, setSuggestedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -144,22 +144,34 @@ console.log(artistsData)
     );
   }
 
-  // Componente HomeCard ajustado para as propriedades da API (imageUrl e genre)
-  const HomeCard = ({ item }) => (
-    <div className="home-card">
-      <a href="#">
-        <div className="home-card-image">
-          <img
-            src={item.imageUrl} // Mudou de item.img para item.imageUrl
-            alt={item.name}     // Mudou de item.title para item.name
-            className="home-card-image-tag"
-          />
-        </div>
-        <h4>{item.name}</h4>    {/* Mudou de item.title para item.name */}
-        <p>{item.genre}</p>     {/* Mudou de item.subtitle para item.genre */}
-      </a>
-    </div>
-  );
+// Componente HomeCard ajustado para as propriedades da API (imageUrl e genre)
+  const HomeCard = ({ item }) => {
+
+    const handleClick = (e) => {
+      e.preventDefault();
+      onNavigate('artist');
+    };
+
+    return (
+      <div
+        className="home-card"
+        onClick={handleClick}
+        style={{ cursor: 'default' }}
+      >
+        <a href="#" style={{ pointerEvents: "none" }}> {/* Desabilita clique no 'a' interno para usar a div pai */}
+          <div className="home-card-image">
+            <img
+              src={item.imageUrl} // Mudou de item.img para item.imageUrl
+              alt={item.name}     // Mudou de item.title para item.name
+              className="home-card-image-tag"
+            />
+          </div>
+          <h4>{item.name}</h4>    {/* Mudou de item.title para item.name */}
+          <p>{item.genre}</p>     {/* Mudou de item.subtitle para item.genre */}
+        </a>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -201,7 +213,7 @@ console.log(artistsData)
         </div>
         <div className="carousel-body">
           {releases.map((item) => (
-            <HomeCard item={item} key={item.id} /> 
+            <HomeCard item={item} key={item.id} />
           ))}
         </div>
       </section>

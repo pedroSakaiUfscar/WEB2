@@ -10,9 +10,17 @@ const ArtistProfile = () => {
     { id: 3, title: 'Echoes', plays: '750K reproduções', duration: '4:12' },
   ];
 
+  const handleSpotifyView = () => {
+    window.open("https://open.spotify.com/intl-pt/artist/06HL4z0CvFAxyc27GXpf02", "_blank");
+  };
+
+  const handleSongClick = (songTitle) => {
+    window.open("https://open.spotify.com/intl-pt/track/2LHNTC9QZxsL3nWpt8iaSR?si=757d655fb8994ed1", "_blank");
+  };
+
   const renderSongItem = (song) => (
-    <div className="song-item" key={song.id}>
-      <a href="#">
+    <div className="song-item" key={song.id} onClick={() => handleSongClick(song.title)}>
+     <a href="#" onClick={(e) => e.preventDefault()}>
         <div className="song-item-icon">
           <img src="/assets/music.svg" width="20" height="20" alt="Ícone de música" />
         </div>
@@ -28,15 +36,15 @@ const ArtistProfile = () => {
   return (
     <>
       <div className="artist-header">
-        <img 
-          src="https://via.placeholder.com/1400x400?text=Banner+do+Artista" 
+        <img
+          src="/assets/banner.png" 
           alt="Banner do Artista" 
           className="profile-banner-img"
         />
 
         <div className="artist-header-content">
           <img 
-            src="https://via.placeholder.com/300x300?text=Foto+do+Artista" 
+            src="/assets/pic.png" 
             alt="Foto do Artista" 
             className="profile-picture"
           />
@@ -45,12 +53,10 @@ const ArtistProfile = () => {
             <h1>Taylor Swift</h1>
             <div className="profile-actions">
               <button className="btn btn-primary">
-                <img src="/assets/heart.svg" width="16" height="16" alt="Icone de coração" />
                 Seguir
               </button>
-              <button className="btn btn-secondary">
-                <img src="/assets/play.svg" width="16" height="16" alt="Icone de play" />
-                Tocar
+              <button className="btn btn-secondary" onClick={handleSpotifyView}>
+                Ver no Spotify
               </button>
             </div>
           </div>

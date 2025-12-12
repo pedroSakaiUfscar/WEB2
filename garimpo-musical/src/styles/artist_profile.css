@@ -113,6 +113,7 @@
 
 .song-item-details {
     flex-grow: 1;
+    margin-right: 10px;
     min-width: 0;
 }
 
