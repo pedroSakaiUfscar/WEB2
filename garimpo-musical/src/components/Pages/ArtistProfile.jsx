@@ -1,35 +1,64 @@
-import React, { useState } from 'react';
-import '../../styles/artist_profile.css'; 
+import React, { useState, useEffect } from 'react';
+import '../../styles/artist_profile.css';
 
-const ArtistProfile = () => {
-  const [activeTab, setActiveTab] = useState('songs'); 
+const ArtistProfile = ({ artistId }) => {
+  const [artist, setArtist] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('songs');
 
-  const songsData = [
-    { id: 1, title: 'Midnight Dreams', plays: '1.2M reproduções', duration: '3:45' },
-    { id: 2, title: 'Lost in the City', plays: '980K reproduções', duration: '2:58' },
-    { id: 3, title: 'Echoes', plays: '750K reproduções', duration: '4:12' },
-  ];
+  useEffect(() => {
+    const fetchArtistData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:8080/api/home/artists/${artistId}`);
+        
+        if (!response.ok) throw new Error('Erro ao carregar artista');
+        
+        const data = await response.json();
+        setArtist(data);
+      } catch (error) {
+        console.error("Erro:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (artistId) {
+      fetchArtistData();
+    }
+  }, [artistId]);
+
+  if (loading) return <div className="loading">Carregando perfil...</div>;
+  if (!artist) return <div className="error">Artista não encontrado.</div>;
 
   const handleSpotifyView = () => {
-    window.open("https://open.spotify.com/intl-pt/artist/06HL4z0CvFAxyc27GXpf02", "_blank");
+    if (artist.spotifyId) {
+      window.open(`https://open.spotify.com/artist/${artist.spotifyId}`, "_blank");
+    }
   };
 
-  const handleSongClick = (songTitle) => {
-    window.open("https://open.spotify.com/intl-pt/track/2LHNTC9QZxsL3nWpt8iaSR?si=757d655fb8994ed1", "_blank");
+  const handleSongClick = (spotifyUrl) => {
+    if (spotifyUrl) {
+      window.open(spotifyUrl, "_blank");
+    }
   };
 
-  const renderSongItem = (song) => (
-    <div className="song-item" key={song.id} onClick={() => handleSongClick(song.title)}>
-     <a href="#" onClick={(e) => e.preventDefault()}>
-        <div className="song-item-icon">
-          <img src="/assets/music.svg" width="20" height="20" alt="Ícone de música" />
-        </div>
-        <div className="song-item-details">
-          <h4>{song.title}</h4>
-          <p>{song.plays}</p>
-        </div>
-        <span className="song-item-duration">{song.duration}</span>
-      </a>
+  const renderSongItem = (song, index) => (
+    <div 
+      className="song-item" 
+      key={song.id} 
+      onClick={() => handleSongClick(song.spotifyUrl)}
+      style={{ cursor: 'pointer' }}
+    >
+      <span className="song-index">{index + 1}</span>
+      <div className="song-item-icon">
+        <img src="/assets/music.svg" width="20" height="20" alt="Ícone" />
+      </div>
+      <div className="song-item-details">
+        <h4>{song.name}</h4>
+        <p>{song.playCount} reproduções</p>
+      </div>
+      <span className="song-item-duration">{song.duration}</span>
     </div>
   );
 
@@ -37,25 +66,28 @@ const ArtistProfile = () => {
     <>
       <div className="artist-header">
         <img
-          src="/assets/banner.png" 
-          alt="Banner do Artista" 
+          src="/assets/banner.png"
+          alt="Banner"
           className="profile-banner-img"
         />
 
         <div className="artist-header-content">
-          <img 
-            src="/assets/pic.png" 
-            alt="Foto do Artista" 
+          <img
+            src={artist.imageUrl}
+            alt={artist.name}
             className="profile-picture"
           />
           <div className="profile-info">
-            <p className="subtitle">Pop Alternativo</p>
-            <h1>Taylor Swift</h1>
+            <p className="subtitle">{artist.genre} • {artist.city}, {artist.state}</p>
+            <h1>{artist.name}</h1>
+            
+            <div className="profile-stats">
+                <span><strong>{artist.songs.length}</strong> músicas</span>
+            </div>
+
             <div className="profile-actions">
-              <button className="btn btn-primary">
-                Seguir
-              </button>
-              <button className="btn btn-secondary" onClick={handleSpotifyView}>
+              <button className="btn btn-seguir">Seguir</button>
+              <button className="btn btn-spotify" onClick={handleSpotifyView}>
                 Ver no Spotify
               </button>
             </div>
@@ -64,19 +96,13 @@ const ArtistProfile = () => {
       </div>
 
       <div className="tab-bar artist-profile-tab-bar">
-        <button 
+        <button
           className={`tab-button ${activeTab === 'songs' ? 'active' : ''}`}
           onClick={() => setActiveTab('songs')}
         >
           Músicas
         </button>
-        <button 
-          className={`tab-button ${activeTab === 'community' ? 'active' : ''}`}
-          onClick={() => setActiveTab('community')}
-        >
-          Comunidade
-        </button>
-        <button 
+        <button
           className={`tab-button ${activeTab === 'about' ? 'active' : ''}`}
           onClick={() => setActiveTab('about')}
         >
@@ -86,26 +112,24 @@ const ArtistProfile = () => {
 
       <div className="tab-content-container">
         {activeTab === 'songs' && (
-          <div id="songs" className="tab-content songs-list active">
-            {songsData.map(renderSongItem)}
-          </div>
-        )}
-
-        {activeTab === 'community' && (
-          <div id="community" className="tab-content community-content">
-            <p style={{ padding: '1rem' }}>Esta é a seção da comunidade. Em breve, postagens e interações!</p>
+          <div className="tab-content songs-list active">
+            {artist.songs.length > 0 ? (
+              artist.songs.map((song, index) => renderSongItem(song, index))
+            ) : (
+              <p style={{padding: '1rem'}}>Nenhuma música encontrada.</p>
+            )}
           </div>
         )}
 
         {activeTab === 'about' && (
-          <div id="about" className="tab-content about-content">
-            <h3 style={{ marginBottom: '1rem' }}>Biografia</h3>
-            <p>Taylor Swift é uma cantora e compositora americana. Uma das artistas mais vendidas de todos os tempos, ela é conhecida por suas narrativas em canções sobre sua vida pessoal.</p>
+          <div className="tab-content about-content">
+            <h3>Sobre {artist.name}</h3>
+            <p>Artista de {artist.genre} originário de {artist.city}.</p>
           </div>
         )}
       </div>
       
-      <br /><br /><br /> 
+      <br/><br/><br/>
     </>
   );
 };

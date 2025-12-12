@@ -77,7 +77,6 @@ const Home = ( {onNavigate}) => {
       setIsLoading(true);
       setError(null);
 
-      // 1. Busca a localização
       const userLocation = await fetchUserLocation();
       let cityName = null;
 
@@ -92,13 +91,10 @@ const Home = ( {onNavigate}) => {
       let artistsUrl = "http://localhost:8080/api/home/artists";
 
       if (cityName) {
-        // Encode para garantir que espaços e acentos não quebrem a URL
         const encodedCity = encodeURIComponent(cityName);
-        // Assumindo que o estado é o mesmo nome da cidade para teste ou ajustar lógica se tiver o estado separado
         artistsUrl += `?city=$SP`;
       }
 
-      // 3. Faz as duas requisições ao Back-end em paralelo
       const [albumsResponse, artistsResponse] = await Promise.all([
         fetch("http://localhost:8080/api/home/albums"),
         fetch(artistsUrl),
@@ -108,11 +104,8 @@ const Home = ( {onNavigate}) => {
         throw new Error("Falha na resposta da API");
       }
 
-      // 4. Converte as respostas para JSON
       const releasesData = await albumsResponse.json();
       const artistsData = await artistsResponse.json();
-console.log(artistsData)
-      // 5. Atualiza o estado da tela
       setReleases(releasesData);
       setSuggestedArtists(artistsData);
     } catch (err) {
@@ -144,31 +137,28 @@ console.log(artistsData)
     );
   }
 
-// Componente HomeCard ajustado para as propriedades da API (imageUrl e genre)
   const HomeCard = ({ item }) => {
 
     const handleClick = (e) => {
       e.preventDefault();
-      onNavigate('artist');
+      onNavigate('artist', item.id);
     };
 
     return (
       <div
         className="home-card"
         onClick={handleClick}
-        style={{ cursor: 'default' }}
+        style={{ cursor: 'pointer' }}
       >
-        <a href="#" style={{ pointerEvents: "none" }}> {/* Desabilita clique no 'a' interno para usar a div pai */}
-          <div className="home-card-image">
-            <img
-              src={item.imageUrl} // Mudou de item.img para item.imageUrl
-              alt={item.name}     // Mudou de item.title para item.name
-              className="home-card-image-tag"
-            />
-          </div>
-          <h4>{item.name}</h4>    {/* Mudou de item.title para item.name */}
-          <p>{item.genre}</p>     {/* Mudou de item.subtitle para item.genre */}
-        </a>
+        <div className="home-card-image">
+          <img
+            src={item.imageUrl}
+            alt={item.name}
+            className="home-card-image-tag"
+          />
+        </div>
+        <h4>{item.name}</h4>
+        <p>{item.genre}</p>
       </div>
     );
   };

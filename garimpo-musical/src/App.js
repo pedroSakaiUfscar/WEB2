@@ -3,35 +3,52 @@ import Sidebar from './components/Layout/Sidebar';
 import BottomNavbar from './components/Layout/BottomNavbar';
 import Home from './components/Pages/Home';
 import Challenges from './components/Pages/Challenges';
-import ArtistProfile from './components/Pages/ArtistProfile'; // NOVO
+import ArtistProfile from './components/Pages/ArtistProfile'; 
 
 function App() {
-  // Simula roteamento: 'home', 'challenges' ou 'artist'
   const [currentPage, setCurrentPage] = useState('home');
+  
+  const [selectedArtistId, setSelectedArtistId] = useState(null);
+
+  const handleNavigate = (page, dataId = null) => {
+    setCurrentPage(page);
+    
+    if (dataId) {
+      setSelectedArtistId(dataId);
+    }
+    
+    window.scrollTo(0, 0);
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <Home onNavigate={setCurrentPage} />; // Adicionei onNavigate para Home
+        return <Home onNavigate={handleNavigate} />;
       case 'challenges':
         return <Challenges />;
       case 'artist':
-        return <ArtistProfile />;
+        return <ArtistProfile artistId={selectedArtistId} />;
       default:
-        return <Home onNavigate={setCurrentPage} />;
+        return <Home onNavigate={handleNavigate} />;
     }
   };
 
   return (
     <>
-      <Sidebar activePage={currentPage} onNavigate={setCurrentPage} />
+    
+      <Sidebar 
+        activePage={currentPage} 
+        onNavigate={(page) => handleNavigate(page)} 
+      />
 
-      {/* A classe "main" é definida no seu common.css para alinhamento e padding */}
       <main className="main"> 
         {renderPage()}
       </main>
       
-      <BottomNavbar activePage={currentPage} onNavigate={setCurrentPage} />
+      <BottomNavbar 
+        activePage={currentPage} 
+        onNavigate={(page) => handleNavigate(page)} 
+      />
     </>
   );
 }
