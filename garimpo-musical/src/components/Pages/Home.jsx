@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/home.css";
 
-const Home = () => {
+const Home = ( {onNavigate}) => {
   const [releases, setReleases] = useState([]);
   const [suggestedArtists, setSuggestedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -10,7 +10,7 @@ const Home = () => {
   const [city, setCity] = useState(null);
 
   const featuredChallenge = {
-    title: "Explorador Musical",
+    title: "Explorador Musical", 
     description: "Ouça 10 artistas novos esta semana e ganhe 100 pontos!",
     progress: 60,
     progressText: "6/10",
@@ -169,21 +169,33 @@ const Home = () => {
     );
   }
 
-  const HomeCard = ({ item }) => (
-    <div className="home-card">
-      <a href="#">
-        <div className="home-card-image">
-          <img
-            src={item.img}
-            alt={item.title}
-            className="home-card-image-tag"
-          />
-        </div>
-        <h4>{item.title}</h4>
-        <p>{item.subtitle}</p>
-      </a>
-    </div>
-  );
+const HomeCard = ({ item }) => {
+
+    const handleClick = (e) => {
+      e.preventDefault(); 
+      onNavigate('artist');
+    };
+
+    return (
+      <div 
+        className="home-card" 
+        onClick={handleClick}
+        style={{ cursor: 'default' }} 
+      >
+        <a href="#" style={{ pointerEvents: "none" }}> {/* Desabilita clique no 'a' interno para usar a div pai */}
+          <div className="home-card-image">
+            <img
+              src={item.img}
+              alt={item.title}
+              className="home-card-image-tag"
+            />
+          </div>
+          <h4>{item.title}</h4>
+          <p>{item.subtitle}</p>
+        </a>
+      </div>
+    );
+  };
 
   return (
     <>
