@@ -7,6 +7,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [location, setLocation] = useState(null);
+  const [city, setCity] = useState(null);
 
   const featuredChallenge = {
     title: "Explorador Musical",
@@ -24,20 +25,51 @@ const Home = () => {
               lat: position.coords.latitude,
               lon: position.coords.longitude,
             };
-            setLocation(userLocation); 
-            resolve(userLocation);     
+            setLocation(userLocation);
+            resolve(userLocation);
           },
           (err) => {
             console.warn(`ERROR(${err.code}): ${err.message}`);
             setLocation(null);
-            resolve(null); 
+            resolve(null);
           }
         );
       } else {
         setLocation(null);
-        resolve(null); 
+        resolve(null);
       }
     });
+  };
+
+  const fetchCityFromCoordinates = async (lat, lon) => {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&addressdetails=1`;
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const address = data.address;
+
+      if (address) {
+        const city =
+          address.city ||
+          address.town ||
+          address.village ||
+          address.municipality ||
+          address.county
+
+        const state = address.state || address.state_district;
+
+        return `${city}, ${state}`;
+      }
+    } catch (error) {
+      console.error("Erro ao chamar API Nominatim:");
+    }
   };
 
   const fetchHomeData = async () => {
@@ -93,7 +125,17 @@ const Home = () => {
       setError(null);
 
       const userLocation = await fetchUserLocation();
-      
+
+      let cityName = null;
+
+      if (userLocation) {
+        cityName = await fetchCityFromCoordinates(
+          userLocation.lat,
+          userLocation.lon
+        );
+        setCity(cityName);
+      }
+
       const data = await fetchHomeData();
 
       setReleases(data.releases);
@@ -113,7 +155,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="main-loading">
-        <div className="spinner"></div> 
+        <div className="spinner"></div>
         <p>Carregando conteúdo...</p>
       </div>
     );
