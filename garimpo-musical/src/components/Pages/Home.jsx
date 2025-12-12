@@ -52,71 +52,24 @@ const Home = () => {
       }
 
       const data = await response.json();
-
       const address = data.address;
 
       if (address) {
-        const city =
+        const cityName =
           address.city ||
           address.town ||
           address.village ||
           address.municipality ||
-          address.county
+          address.county;
 
-        const state = address.state || address.state_district;
+        const stateName = address.state || address.state_district;
 
-        return `${city}, ${state}`;
-      }
+        return `${cityName}`;
+          }
     } catch (error) {
-      console.error("Erro ao chamar API Nominatim:");
+      console.error("Erro ao chamar API Nominatim:", error);
+      return null;
     }
-  };
-
-  const fetchHomeData = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    const releases = [
-      {
-        title: "Folklore",
-        subtitle: "Folk Pop",
-        img: "https://assets.b9.com.br/wp-content/uploads/2020/07/Taylor-Swift-Folklore-capa.jpg",
-      },
-      {
-        title: "Mayhem",
-        subtitle: "Dark Pop",
-        img: "https://upload.wikimedia.org/wikipedia/pt/0/0a/Lady_Gaga_-_Mayhem.jpg",
-      },
-      {
-        title: "Debí Tirar Más Fotos",
-        subtitle: "Jibaro",
-        img: "https://upload.wikimedia.org/wikipedia/pt/a/a5/Deb%C3%AD_Tirar_M%C3%A1s_Fotos.png?20250704014249",
-      },
-      {
-        title: "In Rainbows",
-        subtitle: "Rock Alternativo",
-        img: "https://upload.wikimedia.org/wikipedia/pt/thumb/9/96/Radiohead_-_In_Rainbows.jpg/250px-Radiohead_-_In_Rainbows.jpg",
-      },
-      {
-        title: "Gracinha",
-        subtitle: "R&B Alternativo",
-        img: "https://upload.wikimedia.org/wikipedia/pt/c/ca/Gracinha_-_Manu_Gavassi.png",
-      },
-    ];
-
-    const suggestedArtists = [
-      {
-        title: "In Rainbows",
-        subtitle: "Rock Alternativo",
-        img: "https://upload.wikimedia.org/wikipedia/pt/thumb/9/96/Radiohead_-_In_Rainbows.jpg/250px-Radiohead_-_In_Rainbows.jpg",
-      },
-      {
-        title: "Gracinha",
-        subtitle: "R&B Alternativo",
-        img: "https://upload.wikimedia.org/wikipedia/pt/c/ca/Gracinha_-_Manu_Gavassi.png",
-      },
-    ];
-
-    return { releases, suggestedArtists };
   };
 
   const loadData = async () => {
@@ -124,8 +77,8 @@ const Home = () => {
       setIsLoading(true);
       setError(null);
 
+      // 1. Busca a localização
       const userLocation = await fetchUserLocation();
-
       let cityName = null;
 
       if (userLocation) {
@@ -136,10 +89,32 @@ const Home = () => {
         setCity(cityName);
       }
 
-      const data = await fetchHomeData();
+      let artistsUrl = "http://localhost:8080/api/home/artists";
 
-      setReleases(data.releases);
-      setSuggestedArtists(data.suggestedArtists);
+      if (cityName) {
+        // Encode para garantir que espaços e acentos não quebrem a URL
+        const encodedCity = encodeURIComponent(cityName);
+        // Assumindo que o estado é o mesmo nome da cidade para teste ou ajustar lógica se tiver o estado separado
+        artistsUrl += `?city=$SP`;
+      }
+
+      // 3. Faz as duas requisições ao Back-end em paralelo
+      const [albumsResponse, artistsResponse] = await Promise.all([
+        fetch("http://localhost:8080/api/home/albums"),
+        fetch(artistsUrl),
+      ]);
+
+      if (!albumsResponse.ok || !artistsResponse.ok) {
+        throw new Error("Falha na resposta da API");
+      }
+
+      // 4. Converte as respostas para JSON
+      const releasesData = await albumsResponse.json();
+      const artistsData = await artistsResponse.json();
+console.log(artistsData)
+      // 5. Atualiza o estado da tela
+      setReleases(releasesData);
+      setSuggestedArtists(artistsData);
     } catch (err) {
       console.error("Erro ao buscar dados da API:", err);
       setError("Não foi possível carregar o conteúdo. Tente novamente.");
@@ -169,18 +144,19 @@ const Home = () => {
     );
   }
 
+  // Componente HomeCard ajustado para as propriedades da API (imageUrl e genre)
   const HomeCard = ({ item }) => (
     <div className="home-card">
       <a href="#">
         <div className="home-card-image">
           <img
-            src={item.img}
-            alt={item.title}
+            src={item.imageUrl} // Mudou de item.img para item.imageUrl
+            alt={item.name}     // Mudou de item.title para item.name
             className="home-card-image-tag"
           />
         </div>
-        <h4>{item.title}</h4>
-        <p>{item.subtitle}</p>
+        <h4>{item.name}</h4>    {/* Mudou de item.title para item.name */}
+        <p>{item.genre}</p>     {/* Mudou de item.subtitle para item.genre */}
       </a>
     </div>
   );
@@ -224,20 +200,20 @@ const Home = () => {
           <a href="#">Ver todos</a>
         </div>
         <div className="carousel-body">
-          {releases.map((item, index) => (
-            <HomeCard item={item} key={index} />
+          {releases.map((item) => (
+            <HomeCard item={item} key={item.id} /> 
           ))}
         </div>
       </section>
 
       <section>
         <div className="carousel-header">
-          <h2>Artistas que combinam com você</h2>
+          <h2>Artistas que combinam com você {city ? `em ${city}` : ""}</h2>
           <a href="#">Ver todos</a>
         </div>
         <div className="carousel-body">
-          {suggestedArtists.map((item, index) => (
-            <HomeCard item={item} key={index} />
+          {suggestedArtists.map((item) => (
+            <HomeCard item={item} key={item.id} />
           ))}
         </div>
       </section>
